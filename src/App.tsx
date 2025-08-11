@@ -1,6 +1,58 @@
 import React from 'react';
 
-function App() {
+function Produtos() {
+  // Organize os produtos como mostrado no vídeo
+  // Mostre apenas produtos que forem mais caros que R$ 1500
+  const produtos = [
+    {
+      id: 1,
+      nome: 'Smartphone',
+      preco: 'R$ 2000',
+      cores: ['#29d8d5', '#252a34', '#fc3766'],
+      el: <div></div>,
+    },
+    {
+      id: 2,
+      nome: 'Notebook',
+      preco: 'R$ 3000',
+      cores: ['#ffd045', '#d4394b', '#f37c59'],
+      el: <div></div>,
+    },
+    {
+      id: 3,
+      nome: 'Tablet',
+      preco: 'R$ 1500',
+      cores: ['#365069', '#47c1c8', '#f95786'],
+      el: <div></div>,
+    },
+  ];
+  return (
+    <>
+      {produtos
+        .filter((el) => Number(el.preco.replace('R$ ', '')) > 1500)
+        .map((el) => {
+          return (
+            <div>
+              <h1>{el.nome}</h1>
+              <p>Preço: {el.preco}</p>
+              <ul>
+                {el.cores.map((cor) => (
+                  <li
+                    key={cor}
+                    style={{ backgroundColor: cor, color: 'white' }}
+                  >
+                    {cor}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          );
+        })}
+    </>
+  );
+}
+
+function Clientes() {
   const [selecionado, setSelecionado] = React.useState({
     cliente: '',
     idade: 0,
@@ -30,9 +82,9 @@ function App() {
     ],
     ativa: false,
   };
-  setTimeout(() => {
-    setSelecionado(selecionado.cliente === 'Mario' ? luana : mario);
-  }, 10);
+  // setTimeout(() => {
+  //   setSelecionado(selecionado.cliente === 'Mario' ? luana : mario);
+  // }, 10);
   return (
     <>
       <div style={{ display: 'flex', gap: '16px', flexDirection: 'row' }}>
@@ -61,6 +113,15 @@ function App() {
       >
         TA GASTANDO MUITO
       </h1>
+    </>
+  );
+}
+
+function App() {
+  return (
+    <>
+      <Clientes />
+      <Produtos />
     </>
   );
 }
